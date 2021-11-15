@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Work Order
+            <a class="btn btn-primary float-end" href="{% url 'order_create' %}">Create Order</a>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple" class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Work order name</th>
+                    <th>Apartment</th>
+                    <th>Skillset Required</th>
+                    <th>Severity Level</th>
+                    <th>Current Status</th>
+                    <th>Desired Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Estimated Cost</th>
+                    <th>Actual Cost</th>
+                    <th>Work Order Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <th>{{ order.pk }}</th>
+                        <th>{{ order.work_order_name }}</th>
+                        <th>{{ order.apartment }}</th>
+                        <th>{{ order.skillset_required }}</th>
+                        <th>{{ order.severity_level }}</th>
+                        <th>{{ order.current_status }}</th>
+                        <th>{{ order.desired_completion_date }}</th>
+                        <th>{{ order.actual_completion_date }}</th>
+
+                        <th>{{ order.estimated_cost }}</th>
+
+                        <th>{{ order.actual_cost }}</th>
+
+                        <th>{{ order.work_order_date }}</th>
+                        <th>
+                            <div class="row">
+                                <a class="btn btn-primary" href="{% url 'order_detail' order.pk %}">View
+                                Order</a>
+                            <a class="btn btn-success" href="{% url 'order_update' order.pk %}">Update
+                                Order</a>
+                                <a class="btn btn-danger" href="{% url 'order_delete' order.pk %}">Delete Order</a>
+                            </div>
+
+
+                        </th>
+
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
+
+
